@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chy.template.db.faker.mapper.UserMapper">
+
+    <insert id="batchInsert">
+        insert into t_user (`username`, `tel`, `address`, `birthday`) values
+        <foreach collection="list" item="user" separator=",">
+            (#{user.username}, #{user.tel}, #{user.address}, #{user.birthday})
+        </foreach>
+    </insert>
+
+    <delete id="truncateTable">
+        truncate table t_user
+    </delete>
+
+</mapper>
