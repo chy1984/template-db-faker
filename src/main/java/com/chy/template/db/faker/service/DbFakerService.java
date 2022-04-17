@@ -22,12 +22,12 @@ public interface DbFakerService<T> {
     void batchInsertFaker(int totalCount);
 
     /**
-     * 指定每批次插入的记录数，默认5000
+     * 指定每批次插入的记录数，默认2000
      *
      * @return
      */
     default int getCountOfEachBatch() {
-        return 5000;
+        return 2000;
     }
 
     /**
