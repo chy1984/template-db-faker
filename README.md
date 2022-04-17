@@ -1,18 +1,16 @@
 # template-db-faker
 一个向db中插入假数据的模板，基于 springboot + mybatis 构建。
 
-
-
 pom.xml 中引入的数据库驱动是 mysql 8.x，可根据需要调整。
 
-随机数据生成组件使用国人开源的 [common-random](https://github.com/yindz/common-random)，老外开源的随机数据生成组件 [java-faker](https://github.com/DiUS/java-faker) 虽然功能丰富，但生成的是西方的人名、地址、手机号等随机数据，格式和国内存在较大差别。
+随机数据生成组件：使用的是国人开源的 [common-random](https://github.com/yindz/common-random)
 
+## 效果
+![单元测试截图](单元测试截图.png)
 
-
-
+![数据表截图](数据表截图.png)
 
 ## 使用示例
-
 我提供了2个示例：t_user、t_student，可按照以下步骤使用
 
 1、在数据库中执行 resources/sql脚本/DDL.sql 中的建表语句
@@ -21,16 +19,10 @@ pom.xml 中引入的数据库驱动是 mysql 8.x，可根据需要调整。
 
 3、执行 com.chy.template.db.faker.service 下对应的单元测试，往db中插入假数据
 
-
-
-
-
 ## 向自定义的数据表中插入假数据
-
 1、创建数据表，并在entity包下创建对应的实体类
 
 2、在mapper包下创建对应的mapper接口，并在 resources/mapper 下编写对应的xml映射文件
-
 ```java
 //继承DbFakerMapper，泛型指定对应的实体类，无需定义方法
 public interface UserMapper extends DbFakerMapper<User> {
@@ -62,12 +54,9 @@ public interface UserMapper extends DbFakerMapper<User> {
 </mapper>
 ```
 
-
-
 3、根据需要修改yml中的配置
 
 4、在 service.impl 包下编写对应的service
-
 ```java
 /**
  * 继承 AbstractDbFakerService，泛型指定对应的实体类
@@ -123,10 +112,7 @@ public class UserDbFakerService extends AbstractDbFakerService<User> {
 }
 ```
 
-
-
 5、编写对应的单元测试，往db插入假数据
-
 ```java
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -145,4 +131,3 @@ public class UserDbFakerServiceTest {
 
 }
 ```
-
