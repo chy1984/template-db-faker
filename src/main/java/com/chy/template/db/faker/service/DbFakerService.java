@@ -10,7 +10,7 @@ public interface DbFakerService<T> {
     /**
      * 生成一条假数据
      *
-     * @return
+     * @return T
      */
      T generateFaker();
 
@@ -22,12 +22,12 @@ public interface DbFakerService<T> {
     void batchInsertFaker(int totalCount);
 
     /**
-     * 指定每批次插入的记录数，默认2000
+     * 指定每批次插入的记录数，默认1000
      *
-     * @return
+     * @return int
      */
-    default int getCountOfEachBatch() {
-        return 2000;
+    default int getBatchCount() {
+        return 1000;
     }
 
     /**

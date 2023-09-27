@@ -6,7 +6,7 @@
 <mapper namespace="com.chy.template.db.faker.mapper.UserMapper">
 
     <insert id="batchInsert">
-        insert into t_user (`username`, `tel`, `address`, `birthday`) values
+        insert ignore into t_user (`username`, `tel`, `address`, `birthday`) values
         <foreach collection="list" item="user" separator=",">
             (#{user.username}, #{user.tel}, #{user.address}, #{user.birthday})
         </foreach>

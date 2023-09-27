@@ -12,23 +12,31 @@
     <artifactId>template-db-faker</artifactId>
     <version>1.0</version>
     <name>template-db-faker</name>
-    <description>基于springboot+mybatis构建，用于往db中插入假数据</description>
+    <description>基于 springboot + mybatis 构建，用于往db中插入假数据</description>
+
     <properties>
         <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <mybatis-version>2.2.2</mybatis-version>
+        <common-random-version>1.0.15</common-random-version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>2.2.2</version>
+            <version>${mybatis-version}</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
-
+        <dependency>
+            <groupId>com.apifan.common</groupId>
+            <artifactId>common-random</artifactId>
+            <version>${common-random-version}</version>
+        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -38,12 +46,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.apifan.common</groupId>
-            <artifactId>common-random</artifactId>
-            <version>1.0.11</version>
         </dependency>
     </dependencies>
 

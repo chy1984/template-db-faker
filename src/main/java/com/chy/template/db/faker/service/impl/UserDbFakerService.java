@@ -11,8 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -29,16 +27,14 @@ public class UserDbFakerService extends AbstractDbFakerService<User> {
     private UserMapper userMapper;
 
     @Override
-    protected DbFakerMapper getMapper() {
+    protected DbFakerMapper<User> getMapper() {
         return userMapper;
     }
 
-/*
     @Override
-    public int getCountOfEachBatch(){
-        return 1000;
+    public int getBatchCount() {
+        return 2000;
     }
-*/
 
     @Override
     public User generateFaker() {
@@ -46,25 +42,14 @@ public class UserDbFakerService extends AbstractDbFakerService<User> {
         String username = PersonInfoSource.getInstance().randomChineseNickName(8);
         String tel = PersonInfoSource.getInstance().randomChineseMobile();
         String address = AreaSource.getInstance().randomAddress();
-
-        //生日，1950~2000的随机时间
-        LocalDate beginDate = LocalDate.of(1950, 1, 1);
-        LocalDate endDate = LocalDate.of(2000, 1, 1);
-        String randomDateStr = DateTimeSource.getInstance().randomDate(beginDate, endDate, "yyyy-MM-dd");
-        //允许此字段为null
-        Date birthday = null;
-        try {
-            birthday = DateFormat.getDateInstance().parse(randomDateStr);
-        } catch (ParseException e) {
-            log.error("String类型的时间转换为Date对象出错，randomDateStr={}", randomDateStr, e);
-        }
+        //2000年往前30年内的一个随机日期
+        Date birthday = DateTimeSource.getInstance().randomPastDate(LocalDate.of(2000, 1, 1), 365 * 30L);
 
         return User.builder()
                 .username(username)
                 .tel(tel)
                 .address(address)
                 .birthday(birthday)
-                .createTime(new Date())
                 .build();
     }
 
